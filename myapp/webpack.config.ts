@@ -1,11 +1,12 @@
-import * as webpack from 'webpack';
+import webpack from 'webpack';
 import { join } from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 
 const config: webpack.Configuration = {
   context: join(__dirname, 'src/'),
   entry: {
-    main: './'
+    main: './client/index.tsx'
   },
   mode: 'development',
   module: {
@@ -23,8 +24,14 @@ const config: webpack.Configuration = {
     ]
   },
   resolve: {
-    extensions: [".ts", "tsx", "js", "jsx"]
-  }
+    extensions: [".js", "jsx", ".ts", ".tsx"]
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'server/index.html',
+      inject: true
+    })
+  ]
 }
 
 export default config;
